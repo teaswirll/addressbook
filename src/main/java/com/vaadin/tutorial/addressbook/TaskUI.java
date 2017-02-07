@@ -8,8 +8,8 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.tutorial.addressbook.backend.Contact;
-import com.vaadin.tutorial.addressbook.backend.ContactService;
+import com.vaadin.tutorial.addressbook.backend.Task;
+import com.vaadin.tutorial.addressbook.backend.TaskService;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
@@ -27,8 +27,7 @@ import com.vaadin.v7.ui.TextField;
 @Title("Addressbook")
 @Theme("valo")
 @Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
-public class AddressbookUI extends UI {
-
+public class TaskUI extends UI {
     /*
      * Hundreds of widgets. Vaadin's user interface components are just Java
      * objects that encapsulate and handle cross-browser support and
@@ -37,16 +36,16 @@ public class AddressbookUI extends UI {
      * vaadin.com/directory.
      */
     TextField filter = new TextField();
-    Grid contactList = new Grid();
-    Button newContact = new Button("New contact");
+    Grid taskList = new Grid();
+    Button newTask = new Button("New Task");
 
     // ContactForm is an example of a custom component class
-    ContactForm contactForm = new ContactForm();
+    TaskForm taskForm = new TaskForm();
 
     // ContactService is a in-memory mock DAO that mimics
     // a real-world datasource. Typically implemented for
     // example as EJB or Spring Data based service.
-    ContactService service = ContactService.createDemoService();
+    TaskService service = TaskService.createDemoService();
 
     /*
      * The "Main method".
@@ -69,26 +68,24 @@ public class AddressbookUI extends UI {
          * to synchronously handle those events. Vaadin automatically sends only
          * the needed changes to the web page without loading a new page.
          */
-        newContact.addClickListener(e -> contactForm.edit(new Contact()));
+        newTask.addClickListener(e -> taskForm.edit(new Task()));
 
-        filter.setInputPrompt("Filter contacts...");
+        filter.setInputPrompt("Filter tasks...");
         filter.addTextChangeListener(e -> refreshContacts(e.getText()));
 
-        contactList
-                .setContainerDataSource(new BeanItemContainer<>(Contact.class));
-        contactList.setColumnOrder("firstName", "lastName", "email");
-        contactList.removeColumn("id");
-        contactList.removeColumn("birthDate");
-        contactList.removeColumn("phone");
-        contactList.setSelectionMode(Grid.SelectionMode.SINGLE);
-        contactList.addSelectionListener(
-                e -> contactForm.edit((Contact) contactList.getSelectedRow()));
-        refreshContacts();
+        taskList
+                .setContainerDataSource(new BeanItemContainer<>(Task.class));
+        taskList.setColumnOrder("firstName", "lastName", "task", "startDate", "expectedEndDate");
+        taskList.removeColumn("id");
+        taskList.removeColumn("phone");
+        taskList.setSelectionMode(Grid.SelectionMode.SINGLE);
+        taskList.addSelectionListener(
+                e -> taskForm.edit((Task) taskList.getSelectedRow()));
+        refreshTasks();
     }
 
     /*
-     * Robust layouts.
-     *
+     * Robust layouts
      * Layouts are components that contain other components. HorizontalLayout
      * contains TextField and Button. It is wrapped with a Grid into
      * VerticalLayout for the left side of the screen. Allow user to resize the
@@ -98,17 +95,17 @@ public class AddressbookUI extends UI {
      * choose to setup layout declaratively with Vaadin Designer, CSS and HTML.
      */
     private void buildLayout() {
-        HorizontalLayout actions = new HorizontalLayout(filter, newContact);
+        HorizontalLayout actions = new HorizontalLayout(filter, newTask);
         actions.setWidth("100%");
         filter.setWidth("100%");
         actions.setExpandRatio(filter, 1);
 
-        VerticalLayout left = new VerticalLayout(actions, contactList);
+        VerticalLayout left = new VerticalLayout(actions, taskList);
         left.setSizeFull();
-        contactList.setSizeFull();
-        left.setExpandRatio(contactList, 1);
+        taskList.setSizeFull();
+        left.setExpandRatio(taskList, 1);
 
-        HorizontalLayout mainLayout = new HorizontalLayout(left, contactForm);
+        HorizontalLayout mainLayout = new HorizontalLayout(left, taskForm);
         mainLayout.setSizeFull();
         mainLayout.setExpandRatio(left, 1);
 
@@ -124,14 +121,14 @@ public class AddressbookUI extends UI {
      * your code into classes to easier maintenance. With Vaadin you can follow
      * MVC, MVP or any other design pattern you choose.
      */
-    void refreshContacts() {
+    void refreshTasks() {
         refreshContacts(filter.getValue());
     }
 
     private void refreshContacts(String stringFilter) {
-        contactList.setContainerDataSource(new BeanItemContainer<>(
-                Contact.class, service.findAll(stringFilter)));
-        contactForm.setVisible(false);
+        taskList.setContainerDataSource(new BeanItemContainer<>(
+                Task.class, service.findAll(stringFilter)));
+        taskForm.setVisible(false);
     }
 
     /*
@@ -142,7 +139,7 @@ public class AddressbookUI extends UI {
      * application.
      */
     @WebServlet(urlPatterns = "/*")
-    @VaadinServletConfiguration(ui = AddressbookUI.class, productionMode = false)
+    @VaadinServletConfiguration(ui = TaskUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
 
