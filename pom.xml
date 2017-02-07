@@ -73,21 +73,21 @@
 			<version>2.3</version>
 			<executions>
 				<execution>
-				<phase>package</phase>
-				<goals><goal>copy</goal></goals>
-				<configuration>
-					<artifactItems>
-						<artifactItem>
-							<groupId>org.eclipse.jetty</groupId>
-							<artifactId>jetty-runner</artifactId>
-							<version>9.4.0v20161208</version>
-							<destFileName>jejtty-runner.jar</destFileName>
-						</artifactItem>
-					</artifactItems>
-				</configuration>
-			</execution>
-		</executions>
-	</plugin>
+					<phase>package</phase>
+					<goals><goal>copy</goal></goals>
+					<configuration>
+						<artifactItems>
+							<artifactItem>
+								<groupId>org.eclipse.jetty</groupId>
+								<artifactId>jetty-runner</artifactId>
+								<version>9.4.0v20161208</version>
+								<destFileName>jetty-runner.jar</destFileName>
+							</artifactItem>
+						</artifactItems>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
