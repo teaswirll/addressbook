@@ -80,7 +80,7 @@
 							<artifactItem>
 								<groupId>org.eclipse.jetty</groupId>
 								<artifactId>jetty-runner</artifactId>
-								<version>9.4.0v20161208</version>
+								<version>9.4.0.v20161208</version>
 								<destFileName>jetty-runner.jar</destFileName>
 							</artifactItem>
 						</artifactItems>
