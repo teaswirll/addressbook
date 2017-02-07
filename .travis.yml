@@ -5,8 +5,7 @@ jdk:
 - oraclejdk8
 deploy:
   provider: heroku
-  api_key:
-    secure: M5vdFYUAwOVbfTX+mr2T3k9lmUIRoBVl4+SkS9Xq3HSK4VD/cMv0hI0sugKv82KFTQS2i1DxA4HBFb+yxWS3fk3DSB+k3ncFWqCU+hdDO1q7jYJbDYEshDDRFF56rxkrCRvb277EwNUjGy18r2O1ofDYCzjSiE+MsBAIiAZ+qUnEFaamZ5R2so4az1J7nJoac+C2lcqv3WVxXCVjLj2t80VK1652xhRIiJzvT+xiN9d24M7//NCbXkQjKLS8yXCyHKMMUVYiEodB4M7bTkZnFKR7kXxSatuqKgCIk1xMIa2rAl60I+KJMpbdVQyCKDX5HmxHfwC8KMu0Is7lYcG/t58Ufm6vyEASMfktJKQMPSThEfPlfqrizLgyJYAEDdHg7ClBmIuTl8Pn2fd7kEUD9vVJ3CjFuNIfvkP3STMF9l0jjQnlf446LHzf3lXcuAxN21Y16Mdc4pg6lUtuzM8d2eF/Y8AicpbQh5u7Ug5Vt7VpdIU3Eid/JhDB0kzfB8Ey6e2weHNMmH8ylO+P+hx7xSG7PfRw3ihvji503it43nuIjr6M48pIdNwtxPn03473yg5nMzaoXA8Gg+y4I/sqge7BxQnjE+baqVBG6mh0pEDRnBvkVJi4HyzlOIQehQT01lVqpvFcnOI0zkc7l0G4E5bJn2g0wNoWlbhVj1AXdC8=
+  api_key: 3b2639e6-90c0-4542-8d40-41f05bee82ca
   app: teaswirll-todo
   on:
     repo: teaswirll/addressbook
